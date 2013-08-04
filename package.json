@@ -1,0 +1,42 @@
+{
+  "name": "time-grunt",
+  "version": "0.0.0",
+  "description": "Displays the elapsed execution time of grunt tasks when done",
+  "keywords": [
+    "grunt",
+    "tasks",
+    "measure",
+    "time",
+    "profile"
+  ],
+  "homepage": "https://github.com/sindresorhus/time-grunt",
+  "bugs": "https://github.com/sindresorhus/time-grunt/issues",
+  "license": "MIT",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "http://sindresorhus.com"
+  },
+  "files": [
+    "time-grunt.js"
+  ],
+  "main": "time-grunt",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sindresorhus/time-grunt.git"
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "dependencies": {
+    "chalk": "~0.2.0",
+    "ms": "~0.6.1",
+    "text-table": "~0.1.1"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}
