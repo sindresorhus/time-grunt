@@ -1,6 +1,6 @@
 # time-grunt [![Build Status](https://secure.travis-ci.org/sindresorhus/time-grunt.png?branch=master)](http://travis-ci.org/sindresorhus/time-grunt)
 
-> Displays the elapsed execution time of grunt tasks when done
+> Displays the elapsed execution time of [grunt](http://gruntjs.com) tasks
 
 ![screenshot](screenshot.png)
 
