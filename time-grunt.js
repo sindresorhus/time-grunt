@@ -9,18 +9,22 @@ module.exports = function (grunt) {
 	var prevTaskName = '';
 	var tableData = [];
 
-	setInterval(function () {
+	grunt.util.hooker.hook(grunt.log, 'header', function () {
 		var name = grunt.task.current.nameArgs;
+		var diff = Date.now() - prevTime;
 
-		if (prevTaskName && prevTaskName !== name) {
-			tableData.push([prevTaskName, ms(Date.now() - prevTime)]);
+		// hide tasks taking less than 20ms
+		if (prevTaskName && prevTaskName !== name && diff > 20) {
+			tableData.push([prevTaskName, ms(diff)]);
 			prevTime = Date.now();
 		}
 
 		prevTaskName = name;
-	}, 20);
+	});
 
 	process.on('exit', function () {
+		grunt.util.hooker.unhook(grunt.log, 'header');
+
 		if (prevTaskName) {
 			tableData.push([prevTaskName, ms(Date.now() - prevTime)]);
 		}
