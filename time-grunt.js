@@ -31,7 +31,7 @@ module.exports = function (grunt) {
 
 		tableData.push(['Total', ms(Date.now() - startTime)]);
 
-		grunt.log.header('Elapsed time');
+        grunt.util.hooker.orig(grunt.log, 'header')('Elapsed time');
 		grunt.log.writeln(table(tableData).replace(/Total .+/, chalk.bold('$&')));
 	});
 };
