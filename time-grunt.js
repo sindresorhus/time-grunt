@@ -6,7 +6,7 @@ var table = require('text-table');
 module.exports = function (grunt) {
 	var startTime = Date.now();
 	var prevTime = Date.now();
-	var prevTaskName = '';
+	var prevTaskName = 'loading tasks';
 	var tableData = [];
 
 	grunt.util.hooker.hook(grunt.log, 'header', function () {
