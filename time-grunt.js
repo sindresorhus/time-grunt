@@ -8,6 +8,7 @@ module.exports = function (grunt) {
 	var prevTime = Date.now();
 	var prevTaskName = 'loading tasks';
 	var tableData = [];
+	var headerOrig = grunt.log.header;
 
 	grunt.util.hooker.hook(grunt.log, 'header', function () {
 		var name = grunt.task.current.nameArgs;
@@ -31,7 +32,7 @@ module.exports = function (grunt) {
 
 		tableData.push(['Total', ms(Date.now() - startTime)]);
 
-		grunt.log.header('Elapsed time');
+ 		headerOrig('Elapsed time');
 		grunt.log.writeln(table(tableData).replace(/Total .+/, chalk.bold('$&')));
 	});
 };
