@@ -4,7 +4,6 @@ var ms = require('ms');
 var table = require('text-table');
 
 module.exports = function (grunt) {
-	var MIN_MS = 20;
 	var BAR_CHAR = process.platform === 'win32' ? '█' : '▇';
 
 	var startTime = Date.now();
@@ -17,7 +16,7 @@ module.exports = function (grunt) {
 		var name = grunt.task.current.nameArgs;
 		var diff = Date.now() - prevTime;
 
-		if (prevTaskName && prevTaskName !== name && diff > MIN_MS) {
+		if (prevTaskName && prevTaskName !== name) {
 			tableData.push([prevTaskName, diff]);
 		}
 
@@ -48,8 +47,17 @@ module.exports = function (grunt) {
 
 		var tableDataProcessed = tableData.map(function(row){
 			var avg = row[1]/totalTime;
+			if (avg < 0.1 && !grunt.option('verbose')) {
+				return;
+			}
 			return [row[0], ms(row[1]), createBar(avg)];
-		});
+		}).reduce(function(acc, row) {
+				if (row) {
+					acc.push(row);
+					return acc;
+				}
+				return acc;
+			}, []);
 
 		tableDataProcessed.push([chalk.bold('Total', ms(totalTime))]);
 
@@ -63,7 +71,7 @@ module.exports = function (grunt) {
 		grunt.util.hooker.unhook(grunt.log, 'header');
 
 		var diff = Date.now() - prevTime;
-		if (prevTaskName && diff > MIN_MS) {
+		if (prevTaskName) {
 			tableData.push([prevTaskName, diff]);
 		}
 
