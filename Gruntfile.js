@@ -9,21 +9,21 @@ module.exports = function (grunt) {
 	});
 
 	grunt.registerTask('test2', function () {
-		setTimeout(this.async(), 500);
+		setTimeout(this.async(), 900);
 	});
 
-	grunt.registerTask('test3', function () {
-		setTimeout(this.async(), 100);
+	grunt.registerTask('This is a really long task name', function () {
+		setTimeout(this.async(), 21);
 	});
 
-	grunt.registerTask('default', ['test', 'test2', 'test3']);
+	grunt.registerTask('default', ['test', 'test2', 'This is a really long task name']);
 
 
 	// tests
 	var match = false;
 
 	grunt.util.hooker.hook(grunt.log, 'writeln', function (str) {
-		if (/Total  /.test(str)) {
+		if (/Total/.test(str)) {
 			match = true;
 		}
 	});
