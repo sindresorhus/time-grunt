@@ -5,7 +5,7 @@ var table = require('text-table');
 
 module.exports = function (grunt) {
 	var MIN_MS = 20;
-	var BAR_CHAR = process.platform === 'win32' ? '■' : '▇';
+	var BAR_CHAR = process.platform === 'win32' ? '█' : '▇';
 
 	var startTime = Date.now();
 	var prevTime = Date.now();
