@@ -2,11 +2,10 @@
 var chalk = require('chalk');
 var ms = require('ms');
 var table = require('text-table');
-var os = require('os');
 
 module.exports = function (grunt) {
 	var MIN_MS = 20;
-	var BAR_CHAR = os.type() === 'Windows_NT' ? '■' : '▇';
+	var BAR_CHAR = process.platform === 'win32' ? '■' : '▇';
 
 	var startTime = Date.now();
 	var prevTime = Date.now();
