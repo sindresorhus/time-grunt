@@ -32,7 +32,7 @@ module.exports = function (grunt) {
 			return Math.max(acc, row[0].length);
 		}, 0);
 
-		var maxBarWidth = (process.stdout.columns || 80) - (longestTaskName + 13);
+		var maxBarWidth = (process.stdout.columns || 80) - (longestTaskName + 20);
 
 		function createBar(percentage) {
 			var rounded = Math.round(percentage * 100);
