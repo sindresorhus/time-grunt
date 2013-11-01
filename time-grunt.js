@@ -51,7 +51,7 @@ module.exports = function (grunt) {
 			return [row[0], ms(row[1]), createBar(avg)];
 		});
 
-		tableDataProcessed.push([chalk.bold('Total'), chalk.bold(ms(totalTime))]);
+		tableDataProcessed.push([chalk.bold('Total', ms(totalTime))]);
 
 		return table(tableDataProcessed, {
 			align: [ 'l', 'r', 'l' ],
