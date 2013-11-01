@@ -2,10 +2,11 @@
 var chalk = require('chalk');
 var ms = require('ms');
 var table = require('text-table');
+var os = require('os');
 
 module.exports = function (grunt) {
-    var MIN_MS = 20; // make this an option?
-    var MAX_BAR_WIDTH = Math.floor((process.stdout.columns || 80) * 0.4);
+	var MIN_MS = 20;
+	var BAR_CHAR = os.type() === 'Windows_NT' ? '■' : '▇';
 
 	var startTime = Date.now();
 	var prevTime = Date.now();
@@ -21,39 +22,54 @@ module.exports = function (grunt) {
 			tableData.push([prevTaskName, diff]);
 		}
 
-        prevTime = Date.now();
+		prevTime = Date.now();
 		prevTaskName = name;
 	});
 
-    function formatTable(tableData) {
-        var totalTime = Date.now() - startTime;
+	function formatTable(tableData) {
+		var totalTime = Date.now() - startTime;
 
-        var tableDataProcessed = tableData.map(function(row){
-            var avg = row[1]/totalTime;
-            var barLength = Math.round(MAX_BAR_WIDTH*avg);
-            var bar = barLength > 1 ? new Array(barLength).join('▒') + ' ' : '';
-            var visual = bar + Math.round(avg * 100) + '%';
-            return [row[0], ms(row[1]), visual];
-        });
+		var longestTaskName = tableData.reduce(function(acc, row){
+			return Math.max(acc, row[0].length);
+		}, 0);
 
-        tableDataProcessed.push([chalk.bold('Total'), chalk.bold(ms(totalTime))]);
+		var maxBarWidth = (process.stdout.columns || 80) - (longestTaskName + 10);
 
-        return table(tableDataProcessed, {
-            align: [ 'l', 'r', 'l' ],
-            stringLength: function(str) { return chalk.stripColor(str).length; }
-        })
-    }
+		function createBar(percentage) {
+			var rounded = Math.round(percentage * 100);
+
+			if (rounded === 0) {
+				return '0%';
+			}
+
+			var barLength = Math.ceil(maxBarWidth * percentage) + 1;
+			var bar = new Array(barLength).join(BAR_CHAR);
+			return bar + ' ' + rounded + '%';
+		}
+
+		var tableDataProcessed = tableData.map(function(row){
+			var avg = row[1]/totalTime;
+			return [row[0], ms(row[1]), createBar(avg)];
+		});
+
+		tableDataProcessed.push([chalk.bold('Total'), chalk.bold(ms(totalTime))]);
+
+		return table(tableDataProcessed, {
+			align: [ 'l', 'r', 'l' ],
+			stringLength: function(str) { return chalk.stripColor(str).length; }
+		});
+	}
 
 	process.on('exit', function () {
 		grunt.util.hooker.unhook(grunt.log, 'header');
 
-        var diff = Date.now() - prevTime;
+		var diff = Date.now() - prevTime;
 		if (prevTaskName && diff > MIN_MS) {
 			tableData.push([prevTaskName, diff]);
 		}
 
 		// `grunt.log.header` should be unhooked above, but in some cases it's not
 		headerOrig('Elapsed time');
-        grunt.log.writeln(formatTable(tableData));
+		grunt.log.writeln(formatTable(tableData));
 	});
 };
