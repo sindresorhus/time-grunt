@@ -47,7 +47,7 @@ module.exports = function (grunt) {
 
 		var tableDataProcessed = tableData.map(function(row){
 			var avg = row[1]/totalTime;
-			if (avg < 0.1 && !grunt.option('verbose')) {
+			if (avg < 0.01 && !grunt.option('verbose')) {
 				return;
 			}
 			return [row[0], ms(row[1]), createBar(avg)];
