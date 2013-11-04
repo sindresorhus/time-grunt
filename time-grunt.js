@@ -7,7 +7,7 @@ var table = require('text-table');
 module.exports = function (grunt) {
 	var startTime = Date.now();
 	var prevTime = Date.now();
-	var prevTaskName = 'loading tasks';
+	var prevTaskName = '';
 	var tableData = [];
 	var headerOrig = grunt.log.header;
 
