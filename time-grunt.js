@@ -1,12 +1,13 @@
 'use strict';
 var chalk = require('chalk');
 var ms = require('ms');
+var path = require('path');
 var table = require('text-table');
 
 module.exports = function (grunt) {
 	var startTime = Date.now();
 	var prevTime = Date.now();
-	var prevTaskName = 'loading tasks';
+	var prevTaskName = '';
 	var tableData = [];
 	var headerOrig = grunt.log.header;
 
@@ -21,6 +22,23 @@ module.exports = function (grunt) {
 		}
 
 		prevTaskName = name;
+	});
+
+	var prevLoadTime, prevLoadName;
+	grunt.util.hooker.hook(grunt, 'loadTasks', {
+		pre: function (dir) {
+			var packageName = path.basename(path.dirname(dir));
+			prevLoadTime = Date.now();
+			prevLoadName = 'Load Tasks: ' + packageName;
+		},
+		post: function() {
+			var diff = Date.now() - prevLoadTime;
+			// Only show tasks that took over 20ms to load.
+			if (diff > 20) {
+				tableData.push([prevLoadName, ms(diff)]);
+			}
+			prevLoadTime = Date.now();
+		}
 	});
 
 	process.on('exit', function () {
