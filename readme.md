@@ -23,6 +23,12 @@ module.exports = function (grunt) {
 }
 ```
 
+## Clean layout
+
+To reduce visual clutter `time-grunt` automatically hides tasks that take less than 1% of the total time.
+
+It see all tasks, run Grunt in verbose mode: `grunt --verbose`.
+
 
 ## License
 
