@@ -9,8 +9,8 @@ module.exports = function (grunt) {
 	var startTime = Date.now();
 	var prevTime = Date.now();
 	var prevTaskName = 'loading tasks';
-	var tableData = [];
 	var headerOrig = grunt.log.header;
+	var tableData = [];
 
 	grunt.util.hooker.hook(grunt.log, 'header', function () {
 		var name = grunt.task.current.nameArgs;
@@ -27,7 +27,7 @@ module.exports = function (grunt) {
 	function formatTable(tableData) {
 		var totalTime = Date.now() - startTime;
 
-		var longestTaskName = tableData.reduce(function(acc, row){
+		var longestTaskName = tableData.reduce(function (acc, row) {
 			return Math.max(acc, row[0].length);
 		}, 0);
 
@@ -45,25 +45,27 @@ module.exports = function (grunt) {
 			return bar + ' ' + rounded + '%';
 		}
 
-		var tableDataProcessed = tableData.map(function(row){
-			var avg = row[1]/totalTime;
+		var tableDataProcessed = tableData.map(function (row) {
+			var avg = row[1] / totalTime;
 			if (avg < 0.01 && !grunt.option('verbose')) {
 				return;
 			}
 			return [row[0], ms(row[1]), createBar(avg)];
-		}).reduce(function(acc, row) {
-				if (row) {
-					acc.push(row);
-					return acc;
-				}
+		}).reduce(function (acc, row) {
+			if (row) {
+				acc.push(row);
 				return acc;
-			}, []);
+			}
+			return acc;
+		}, []);
 
 		tableDataProcessed.push([chalk.bold('Total', ms(totalTime))]);
 
 		return table(tableDataProcessed, {
 			align: [ 'l', 'r', 'l' ],
-			stringLength: function(str) { return chalk.stripColor(str).length; }
+			stringLength: function (str) {
+				return chalk.stripColor(str).length;
+			}
 		});
 	}
 
