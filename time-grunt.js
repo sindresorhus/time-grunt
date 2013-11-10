@@ -4,8 +4,11 @@ var ms = require('ms');
 var table = require('text-table');
 
 module.exports = function (grunt) {
-	var BAR_CHAR = process.platform === 'win32' ? '■' : '▇';
+	if (grunt.option('help')) {
+		return;
+	}
 
+	var BAR_CHAR = process.platform === 'win32' ? '■' : '▇';
 	var startTime = Date.now();
 	var prevTime = Date.now();
 	var prevTaskName = 'loading tasks';
