@@ -31,6 +31,10 @@ module.exports = function (grunt) {
 		var totalTime = Date.now() - startTime;
 
 		var longestTaskName = tableData.reduce(function (acc, row) {
+			var avg = row[1] / totalTime;
+			if (avg < 0.01 && !grunt.option('verbose')) {
+				return acc;
+			}
 			return Math.max(acc, row[0].length);
 		}, 0);
 
