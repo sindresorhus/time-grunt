@@ -2,6 +2,7 @@
 var chalk = require('chalk');
 var ms = require('ms');
 var table = require('text-table');
+var hooker = require('hooker');
 
 module.exports = function (grunt) {
 	if (grunt.option('help')) {
@@ -15,7 +16,7 @@ module.exports = function (grunt) {
 	var headerOrig = grunt.log.header;
 	var tableData = [];
 
-	grunt.util.hooker.hook(grunt.log, 'header', function () {
+	hooker.hook(grunt.log, 'header', function () {
 		var name = grunt.task.current.nameArgs;
 		var diff = Date.now() - prevTime;
 
@@ -77,7 +78,7 @@ module.exports = function (grunt) {
 	}
 
 	process.on('exit', function () {
-		grunt.util.hooker.unhook(grunt.log, 'header');
+		hooker.unhook(grunt.log, 'header');
 
 		var diff = Date.now() - prevTime;
 		if (prevTaskName) {
