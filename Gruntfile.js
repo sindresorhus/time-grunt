@@ -20,12 +20,17 @@ module.exports = function (grunt) {
 		setTimeout(this.async(), 1);
 	});
 
+	grunt.registerTask('This is a really long task name which is cropped in the middle', function () {
+		setTimeout(this.async(), 21);
+	});
+
 	grunt.registerTask('default', [
-    'test',
-    'test2',
-    'This is a really long task name',
-    'This is the longest but very quick task name'
-  ]);
+		'test',
+		'test2',
+		'This is a really long task name',
+		'This is the longest but very quick task name',
+		'This is a really long task name which is cropped in the middle'
+	]);
 
 
 	// tests

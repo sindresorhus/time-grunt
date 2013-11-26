@@ -39,7 +39,27 @@ module.exports = function (grunt) {
 			return Math.max(acc, row[0].length);
 		}, 0);
 
-		var maxBarWidth = (process.stdout.columns || 80) - (longestTaskName + 20);
+		var maxColumns = process.stdout.columns || 80;
+		var maxBarWidth;
+
+		if (longestTaskName > maxColumns / 2) {
+			maxBarWidth = (maxColumns - 20) / 2;
+		} else {
+			maxBarWidth = maxColumns - (longestTaskName + 20);
+		}
+
+		function shorten(taskName) {
+			var nameLength = taskName.length;
+
+			if (nameLength <= maxBarWidth) {
+				return taskName;
+			}
+
+			var partLength = Math.floor((maxBarWidth - 3) / 2);
+			var start = taskName.substr(0, partLength + 1);
+			var end = taskName.substr(nameLength - partLength);
+			return start.trim() + '...' + end.trim();
+		}
 
 		function createBar(percentage) {
 			var rounded = Math.round(percentage * 100);
@@ -58,7 +78,7 @@ module.exports = function (grunt) {
 			if (avg < 0.01 && !grunt.option('verbose')) {
 				return;
 			}
-			return [row[0], ms(row[1]), createBar(avg)];
+			return [shorten(row[0]), ms(row[1]), createBar(avg)];
 		}).reduce(function (acc, row) {
 			if (row) {
 				acc.push(row);
