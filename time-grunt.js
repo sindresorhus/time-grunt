@@ -10,8 +10,10 @@ module.exports = function (grunt) {
 	}
 
 	var BAR_CHAR = process.platform === 'win32' ? '■' : '▇';
-	var startTime = Date.now();
-	var prevTime = Date.now();
+	var now = new Date();
+	var startTimePretty = now.toString();
+	var startTime = now.getTime();
+	var prevTime = startTime;
 	var prevTaskName = 'loading tasks';
 	var headerOrig = grunt.log.header;
 	var tableData = [];
@@ -109,4 +111,7 @@ module.exports = function (grunt) {
 		headerOrig('Elapsed time');
 		grunt.log.writeln(formatTable(tableData));
 	});
+
+	headerOrig('Start time:');
+	grunt.log.writeln(startTimePretty.cyan);
 };
