@@ -11,7 +11,7 @@ module.exports = function (grunt) {
 
 	var BAR_CHAR = process.platform === 'win32' ? '■' : '▇';
 	var now = new Date();
-	var startTimePretty = now.toString();
+	var startTimePretty = now.toISOString().replace(/T/, ' ').replace(/\..+/, '') + ' UTC';
 	var startTime = now.getTime();
 	var prevTime = startTime;
 	var prevTaskName = 'loading tasks';
