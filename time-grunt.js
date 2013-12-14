@@ -108,9 +108,7 @@ module.exports = function (grunt) {
 		}
 
 		// `grunt.log.header` should be unhooked above, but in some cases it's not
-		headerOrig('Execution Time');
-		grunt.log.writeln('Start: ' + startTimePretty.cyan);
-		grunt.log.writeln('Tasks:');
+		headerOrig('Execution Time' + chalk.gray.reset(' (' + startTimePretty + ')'));
 		grunt.log.writeln(formatTable(tableData));
 	});
 };
