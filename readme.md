@@ -1,13 +1,17 @@
 # time-grunt [![Build Status](https://secure.travis-ci.org/sindresorhus/time-grunt.png?branch=master)](http://travis-ci.org/sindresorhus/time-grunt)
 
-> Displays the elapsed execution time of [grunt](http://gruntjs.com) tasks
+> Displays the execution time of [grunt](http://gruntjs.com) tasks
 
 ![screenshot](screenshot.png)
 
 
 ## Install
 
-Install with [npm](https://npmjs.org/package/time-grunt): `npm install --save time-grunt`
+Install with [npm](https://npmjs.org/package/time-grunt)
+
+```
+npm install --save time-grunt
+```
 
 
 ## Example
@@ -19,17 +23,16 @@ module.exports = function (grunt) {
 	require('time-grunt')(grunt);
 
 	grunt.initConfig();
-	grunt.registerTask('default', []);
 }
 ```
 
 ## Clean layout
 
-To reduce visual clutter `time-grunt` automatically hides tasks that take less than 1% of the total time.
+Tasks that take less than 1% of the total time are hidden to reduce clutter.
 
-It see all tasks, run Grunt in verbose mode: `grunt --verbose`.
+Run grunt with `grunt --verbose` to see all tasks.
 
 
 ## License
 
-MIT License • © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](http://sindresorhus.com)
