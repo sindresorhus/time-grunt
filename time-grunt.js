@@ -10,8 +10,10 @@ module.exports = function (grunt) {
 	}
 
 	var BAR_CHAR = process.platform === 'win32' ? '■' : '▇';
-	var startTime = Date.now();
-	var prevTime = Date.now();
+	var now = new Date();
+	var startTimePretty = now.toISOString().replace(/T/, ' ').replace(/\..+/, '') + ' UTC';
+	var startTime = now.getTime();
+	var prevTime = startTime;
 	var prevTaskName = 'loading tasks';
 	var headerOrig = grunt.log.header;
 	var tableData = [];
@@ -106,7 +108,9 @@ module.exports = function (grunt) {
 		}
 
 		// `grunt.log.header` should be unhooked above, but in some cases it's not
-		headerOrig('Elapsed time');
+		headerOrig('Execution Time');
+		grunt.log.writeln('Start: ' + startTimePretty.cyan);
+		grunt.log.writeln('Tasks:');
 		grunt.log.writeln(formatTable(tableData));
 	});
 };
