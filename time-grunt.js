@@ -5,11 +5,12 @@ var table = require('text-table');
 var hooker = require('hooker');
 
 // crazy hack to work around stupid node-exit
-var exit = function () {
+var exit = function (exitCode) {
 	clearInterval(interval);
-	process.emit('timegruntexit');
+	process.emit('timegruntexit', exitCode);
 	exit = function () {};
 };
+var originalExit = process.exit;
 var log = function (str) {write(str + '\n', 'utf8')};
 var write = process.stdout.write.bind(process.stdout);
 var interval = setInterval(function () {process.exit = exit}, 100);
@@ -110,7 +111,10 @@ module.exports = function (grunt) {
 		});
 	}
 
-	process.once('timegruntexit', function () {
+	process.once('timegruntexit', function (exitCode) {
+		clearInterval(interval);
+		process.exit = originalExit;
+
 		hooker.unhook(grunt.log, 'header');
 
 		var diff = Date.now() - prevTime;
@@ -121,6 +125,6 @@ module.exports = function (grunt) {
 		// `grunt.log.header` should be unhooked above, but in some cases it's not
 		log('\n\n' + chalk.underline('Execution Time') + chalk.gray(' (' + startTimePretty + ')'));
 		log(formatTable(tableData));
-		process.exit();
+		process.exit(exitCode);
 	});
 };
