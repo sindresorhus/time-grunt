@@ -10,6 +10,7 @@ var exit = function () {
 	process.emit('timegruntexit');
 	exit = function () {};
 };
+var originalExit = process.exit;
 var log = function (str) {write(str + '\n', 'utf8')};
 var write = process.stdout.write.bind(process.stdout);
 var interval = setInterval(function () {process.exit = exit}, 100);
@@ -111,6 +112,9 @@ module.exports = function (grunt) {
 	}
 
 	process.once('timegruntexit', function () {
+		clearInterval(interval);
+		process.exit = originalExit;
+		
 		hooker.unhook(grunt.log, 'header');
 
 		var diff = Date.now() - prevTime;
