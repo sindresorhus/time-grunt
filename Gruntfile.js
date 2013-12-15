@@ -2,7 +2,18 @@
 var assert = require('assert');
 
 module.exports = function (grunt) {
-	require('./time-grunt')(grunt);
+
+    // tests
+    var match = false;
+
+    grunt.util.hooker.hook(process.stdout, 'write', function (str) {
+        if (/Total/.test(str)) {
+            match = true;
+        }
+    });
+
+
+    require('./time-grunt')(grunt);
 
 	grunt.registerTask('test', function () {
 		setTimeout(this.async(), 1000);
@@ -32,15 +43,6 @@ module.exports = function (grunt) {
 		'This is a really long task name which is cropped in the middle'
 	]);
 
-
-	// tests
-	var match = false;
-
-	grunt.util.hooker.hook(grunt.log, 'writeln', function (str) {
-		if (/Total/.test(str)) {
-			match = true;
-		}
-	});
 
 	process.on('exit', function () {
 		if (!match) {
