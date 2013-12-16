@@ -1,4 +1,4 @@
-# time-grunt [![Build Status](https://secure.travis-ci.org/sindresorhus/time-grunt.png?branch=master)](http://travis-ci.org/sindresorhus/time-grunt)
+# time-grunt [![Build Status](https://secure.travis-ci.org/sindresorhus/time-grunt.png?branch=master)](http://travis-ci.org/sindresorhus/time-grunt) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 > Displays the execution time of [grunt](http://gruntjs.com) tasks
 
