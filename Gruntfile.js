@@ -35,6 +35,13 @@ module.exports = function (grunt) {
 		setTimeout(this.async(), 21);
 	});
 
+	grunt.registerTask('testsigint', function () {
+		this.async();
+		setTimeout(function() {
+			process.emit('SIGINT');
+		}, 21);
+	});
+
 	grunt.registerTask('default', [
 		'test',
 		'test2',
@@ -43,6 +50,10 @@ module.exports = function (grunt) {
 		'This is a really long task name which is cropped in the middle'
 	]);
 
+	grunt.registerTask('sigint', [
+		'test',
+		'testsigint'
+	]);
 
 	process.on('exit', function () {
 		if (!match) {

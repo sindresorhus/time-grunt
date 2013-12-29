@@ -111,6 +111,10 @@ module.exports = function (grunt) {
 		});
 	}
 
+	process.on('SIGINT', function() {
+		process.exit();
+	});
+
 	process.once('timegruntexit', function (exitCode) {
 		clearInterval(interval);
 		process.exit = originalExit;
