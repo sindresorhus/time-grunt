@@ -14,6 +14,7 @@ var originalExit = process.exit;
 var log = function (str) {write(str + '\n', 'utf8')};
 var write = process.stdout.write.bind(process.stdout);
 var interval = setInterval(function () {process.exit = exit}, 100);
+process.exit = exit;
 //
 
 module.exports = function (grunt) {
