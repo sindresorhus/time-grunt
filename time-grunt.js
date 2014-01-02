@@ -1,6 +1,6 @@
 'use strict';
 var chalk = require('chalk');
-var ms = require('ms');
+var moment = require('moment');
 var table = require('text-table');
 var hooker = require('hooker');
 
@@ -16,6 +16,15 @@ var write = process.stdout.write.bind(process.stdout);
 var interval = setInterval(function () {process.exit = exit}, 100);
 process.exit = exit;
 //
+
+function formatDuration(dur) {
+	var duration = moment.duration(dur);
+	if(dur < 1000) {
+		return duration.asMilliseconds() + 'ms';
+	} else {
+		return duration.asSeconds() +'s';
+	}
+}
 
 module.exports = function (grunt) {
 	if (grunt.option('help')) {
@@ -93,7 +102,7 @@ module.exports = function (grunt) {
 			if (avg < 0.01 && !grunt.option('verbose')) {
 				return;
 			}
-			return [shorten(row[0]), ms(row[1]), createBar(avg)];
+			return [shorten(row[0]), formatDuration(row[1]), createBar(avg)];
 		}).reduce(function (acc, row) {
 			if (row) {
 				acc.push(row);
@@ -102,7 +111,7 @@ module.exports = function (grunt) {
 			return acc;
 		}, []);
 
-		tableDataProcessed.push([chalk.bold('Total', ms(totalTime))]);
+		tableDataProcessed.push([chalk.bold('Total', formatDuration(totalTime))]);
 
 		return table(tableDataProcessed, {
 			align: [ 'l', 'r', 'l' ],
