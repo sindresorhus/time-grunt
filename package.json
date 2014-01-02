@@ -9,8 +9,6 @@
     "time",
     "profile"
   ],
-  "homepage": "https://github.com/sindresorhus/time-grunt",
-  "bugs": "https://github.com/sindresorhus/time-grunt/issues",
   "license": "MIT",
   "author": {
     "name": "Sindre Sorhus",
@@ -20,21 +18,18 @@
   "files": [
     "time-grunt.js"
   ],
-  "main": "time-grunt",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/sindresorhus/time-grunt.git"
-  },
+  "main": "time-grunt.js",
+  "repository": "sindresorhus/time-grunt",
   "scripts": {
     "test": "grunt && grunt sigint"
   },
   "dependencies": {
-    "chalk": "~0.3.0",
+    "chalk": "~0.4.0",
     "text-table": "~0.2.0",
     "hooker": "~0.2.3"
   },
   "devDependencies": {
-    "grunt": "~0.4.1"
+    "grunt": "~0.4.2"
   },
   "engines": {
     "node": ">=0.8.0"
