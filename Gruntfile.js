@@ -16,7 +16,7 @@ module.exports = function (grunt) {
 	require('./time-grunt')(grunt);
 
 	grunt.registerTask('test', function () {
-		setTimeout(this.async(), 1000);
+		setTimeout(this.async(), 1200);
 	});
 
 	grunt.registerTask('test2', function () {

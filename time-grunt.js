@@ -1,6 +1,5 @@
 'use strict';
 var chalk = require('chalk');
-var moment = require('moment');
 var table = require('text-table');
 var hooker = require('hooker');
 
@@ -17,13 +16,8 @@ var interval = setInterval(function () {process.exit = exit}, 100);
 process.exit = exit;
 //
 
-function formatDuration(dur) {
-	var duration = moment.duration(dur);
-	if(dur < 1000) {
-		return duration.asMilliseconds() + 'ms';
-	} else {
-		return duration.asSeconds() +'s';
-	}
+function formatDuration(ms) {
+	return ms > 1000 ? (ms / 1000).toFixed(1).replace(/\.0$/, '') + 's' : ms + 'ms';
 }
 
 module.exports = function (grunt) {

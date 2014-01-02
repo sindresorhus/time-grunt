@@ -31,8 +31,7 @@
   "dependencies": {
     "chalk": "~0.3.0",
     "text-table": "~0.2.0",
-    "hooker": "~0.2.3",
-    "moment": "~2.5.0"
+    "hooker": "~0.2.3"
   },
   "devDependencies": {
     "grunt": "~0.4.1"
