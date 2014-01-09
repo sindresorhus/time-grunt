@@ -2,6 +2,7 @@
 var chalk = require('chalk');
 var table = require('text-table');
 var hooker = require('hooker');
+var dateTime = require('date-time');
 
 // crazy hack to work around stupid node-exit
 var exit = function (exitCode) {
@@ -27,7 +28,7 @@ module.exports = function (grunt) {
 
 	var BAR_CHAR = process.platform === 'win32' ? '■' : '▇';
 	var now = new Date();
-	var startTimePretty = now.toISOString().replace(/T/, ' ').replace(/\..+/, '') + ' UTC';
+	var startTimePretty = dateTime();
 	var startTime = now.getTime();
 	var prevTime = startTime;
 	var prevTaskName = 'loading tasks';
