@@ -3,6 +3,17 @@ var chalk = require('chalk');
 var table = require('text-table');
 var hooker = require('hooker');
 var dateTime = require('date-time');
+var argv = process.argv;
+
+
+if (argv.indexOf('--help') !== -1) {
+	return;
+}
+
+if (argv.indexOf('--version') !== -1 && argv.indexOf('--verbose') !== -1) {
+	return;
+}
+
 
 // crazy hack to work around stupid node-exit
 var exit = function (exitCode) {
@@ -22,10 +33,6 @@ function formatDuration(ms) {
 }
 
 module.exports = function (grunt) {
-	if (grunt.option('help')) {
-		return;
-	}
-
 	var BAR_CHAR = process.platform === 'win32' ? '■' : '▇';
 	var now = new Date();
 	var startTimePretty = dateTime();
