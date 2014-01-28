@@ -35,13 +35,13 @@ module.exports = function (grunt) {
     // crazy hack to work around stupid node-exit
 	// Can this be removed now that node-exit#4 has been resolved?
 	// https://github.com/cowboy/node-exit/issues/4
+	var originalExit = process.exit;
     function exit(exitCode) {
         clearInterval(interval);
         process.emit('timegruntexit', exitCode);
         exit = function () {};
     }
-    var originalExit = process.exit;
-    //var interval = setInterval(function () {process.exit = exit}, 100);
+	var interval = setInterval(function () {process.exit = exit}, 100);
     process.exit = exit;
 
 	hooker.hook(grunt.log, 'header', function () {
