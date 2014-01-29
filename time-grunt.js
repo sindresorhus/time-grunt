@@ -24,25 +24,29 @@ module.exports = function (grunt) {
 	var prevTaskName = 'loading tasks';
 	var tableData = [];
 
-    if (argv.indexOf('--help') !== -1) {
-    	return;
-    }
+	if (argv.indexOf('--help') !== -1) {
+		return;
+	}
 
-    if (argv.indexOf('--version') !== -1 && argv.indexOf('--verbose') !== -1) {
-    	return;
-    }
+	if (argv.indexOf('--version') !== -1 && argv.indexOf('--verbose') !== -1) {
+		return;
+	}
 
-    // crazy hack to work around stupid node-exit
+	// crazy hack to work around stupid node-exit
 	// Can this be removed now that node-exit#4 has been resolved?
 	// https://github.com/cowboy/node-exit/issues/4
 	var originalExit = process.exit;
-    function exit(exitCode) {
-        clearInterval(interval);
-        process.emit('timegruntexit', exitCode);
-        exit = function () {};
-    }
-	var interval = setInterval(function () {process.exit = exit}, 100);
-    process.exit = exit;
+
+	function exit(exitCode) {
+		clearInterval(interval);
+		process.emit('timegruntexit', exitCode);
+		exit = function() {};
+	}
+
+	var interval = setInterval(function () {
+		process.exit = exit;
+	}, 100);
+	process.exit = exit;
 
 	hooker.hook(grunt.log, 'header', function () {
 		var name = grunt.task.current.nameArgs;
@@ -125,7 +129,7 @@ module.exports = function (grunt) {
 		});
 	}
 
-	process.on('SIGINT', function() {
+	process.on('SIGINT', function () {
 		process.exit();
 	});
 
