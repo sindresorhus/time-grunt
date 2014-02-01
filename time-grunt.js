@@ -5,28 +5,11 @@ var hooker = require('hooker');
 var dateTime = require('date-time');
 var argv = process.argv;
 
-
-if (argv.indexOf('--help') !== -1) {
-	return;
-}
-
-if (argv.indexOf('--version') !== -1 && argv.indexOf('--verbose') !== -1) {
-	return;
-}
-
-
-// crazy hack to work around stupid node-exit
-var exit = function (exitCode) {
-	clearInterval(interval);
-	process.emit('timegruntexit', exitCode);
-	exit = function () {};
-};
-var originalExit = process.exit;
-var log = function (str) {write(str + '\n', 'utf8')};
 var write = process.stdout.write.bind(process.stdout);
-var interval = setInterval(function () {process.exit = exit}, 100);
-process.exit = exit;
-//
+
+function log(str) {
+	write(str + '\n', 'utf8')
+}
 
 function formatDuration(ms) {
 	return ms > 1000 ? (ms / 1000).toFixed(1).replace(/\.0$/, '') + 's' : ms + 'ms';
@@ -39,8 +22,31 @@ module.exports = function (grunt) {
 	var startTime = now.getTime();
 	var prevTime = startTime;
 	var prevTaskName = 'loading tasks';
-	var headerOrig = grunt.log.header;
 	var tableData = [];
+
+	if (argv.indexOf('--help') !== -1) {
+		return;
+	}
+
+	if (argv.indexOf('--version') !== -1 && argv.indexOf('--verbose') !== -1) {
+		return;
+	}
+
+	// crazy hack to work around stupid node-exit
+	// Can this be removed now that node-exit#4 has been resolved?
+	// https://github.com/cowboy/node-exit/issues/4
+	var originalExit = process.exit;
+
+	function exit(exitCode) {
+		clearInterval(interval);
+		process.emit('timegruntexit', exitCode);
+		exit = function() {};
+	}
+
+	var interval = setInterval(function () {
+		process.exit = exit;
+	}, 100);
+	process.exit = exit;
 
 	hooker.hook(grunt.log, 'header', function () {
 		var name = grunt.task.current.nameArgs;
@@ -123,7 +129,7 @@ module.exports = function (grunt) {
 		});
 	}
 
-	process.on('SIGINT', function() {
+	process.on('SIGINT', function () {
 		process.exit();
 	});
 
