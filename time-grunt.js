@@ -16,7 +16,6 @@ function formatDuration(ms) {
 }
 
 module.exports = function (grunt) {
-	var BAR_CHAR = process.platform === 'win32' ? '■' : '▇';
 	var now = new Date();
 	var startTimePretty = dateTime();
 	var startTime = now.getTime();
@@ -71,6 +70,10 @@ module.exports = function (grunt) {
 			return Math.max(acc, row[0].length);
 		}, 0);
 
+		var longestTaskTime = tableData.reduce(function (last, row) {
+			return Math.max(last, row[1]);
+		}, 0);
+
 		var maxColumns = process.stdout.columns || 80;
 		var maxBarWidth;
 
@@ -93,24 +96,34 @@ module.exports = function (grunt) {
 			return start.trim() + '...' + end.trim();
 		}
 
-		function createBar(percentage) {
+		function barChars (length) {
+			return new Array(length).join(' ');
+		}
+
+		function createBar(percentage, widthPercentage) {
 			var rounded = Math.round(percentage * 100);
 
 			if (rounded === 0) {
 				return '0%';
 			}
 
-			var barLength = Math.ceil(maxBarWidth * percentage) + 1;
-			var bar = new Array(barLength).join(BAR_CHAR);
-			return bar + ' ' + rounded + '%';
+			var barLength = Math.ceil(maxBarWidth * widthPercentage) + 1;
+			var percentLength = rounded > 9 ? 5 : 4;
+
+			if (barLength < percentLength) {
+				return chalk.bgWhite.black(barChars(barLength)) + ' ' + rounded + '%';
+			}
+
+			return chalk.bgWhite.black(' ' + rounded + '%' + barChars(barLength + 1 - percentLength));
 		}
 
 		var tableDataProcessed = tableData.map(function (row) {
 			var avg = row[1] / totalTime;
+			var width = row[1] / longestTaskTime;
 			if (avg < 0.01 && !grunt.option('verbose')) {
 				return;
 			}
-			return [shorten(row[0]), formatDuration(row[1]), createBar(avg)];
+			return [shorten(row[0]), formatDuration(row[1]), createBar(avg, width)];
 		}).reduce(function (acc, row) {
 			if (row) {
 				acc.push(row);
