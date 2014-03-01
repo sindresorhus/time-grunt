@@ -24,11 +24,12 @@ module.exports = function (grunt) {
 	var prevTaskName = 'loading tasks';
 	var tableData = [];
 
-	if (argv.indexOf('--help') !== -1) {
-		return;
-	}
-
-	if (argv.indexOf('--version') !== -1 && argv.indexOf('--verbose') !== -1) {
+	if (argv.indexOf('--help') !== -1 ||
+	    argv.indexOf('-h') !== -1 ||
+	    argv.indexOf('--version') !== -1 ||
+	    argv.indexOf('-V') !== -1 ||
+	    argv.indexOf('--verbose') !== -1 ||
+	    argv.indexOf('--v') !== -1) {
 		return;
 	}
 
