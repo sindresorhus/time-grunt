@@ -1,6 +1,6 @@
 {
   "name": "time-grunt",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Displays the elapsed execution time of grunt tasks when done",
   "keywords": [
     "grunt",
