@@ -24,15 +24,16 @@
     "test": "grunt && grunt sigint"
   },
   "dependencies": {
-    "chalk": "~0.4.0",
-    "text-table": "~0.2.0",
-    "hooker": "~0.2.3",
-    "date-time": "~0.1.0"
+    "chalk": "^0.4.0",
+    "text-table": "^0.2.0",
+    "hooker": "^0.2.3",
+    "date-time": "^0.1.0",
+    "pretty-ms": "^0.1.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.2"
+    "grunt": "^0.4.2"
   },
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">=0.10.0"
   }
 }

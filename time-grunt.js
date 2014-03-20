@@ -3,16 +3,13 @@ var chalk = require('chalk');
 var table = require('text-table');
 var hooker = require('hooker');
 var dateTime = require('date-time');
+var prettyMs = require('pretty-ms');
 var argv = process.argv;
 
 var write = process.stdout.write.bind(process.stdout);
 
 function log(str) {
 	write(str + '\n', 'utf8')
-}
-
-function formatDuration(ms) {
-	return ms > 1000 ? (ms / 1000).toFixed(1).replace(/\.0$/, '') + 's' : ms + 'ms';
 }
 
 module.exports = function (grunt) {
@@ -111,7 +108,7 @@ module.exports = function (grunt) {
 			if (avg < 0.01 && !grunt.option('verbose')) {
 				return;
 			}
-			return [shorten(row[0]), formatDuration(row[1]), createBar(avg)];
+			return [shorten(row[0]), prettyMs(row[1]), createBar(avg)];
 		}).reduce(function (acc, row) {
 			if (row) {
 				acc.push(row);
@@ -120,7 +117,7 @@ module.exports = function (grunt) {
 			return acc;
 		}, []);
 
-		tableDataProcessed.push([chalk.bold('Total', formatDuration(totalTime))]);
+		tableDataProcessed.push([chalk.bold('Total', prettyMs(totalTime))]);
 
 		return table(tableDataProcessed, {
 			align: [ 'l', 'r', 'l' ],
