@@ -108,7 +108,7 @@ module.exports = function (grunt) {
 			if (avg < 0.01 && !grunt.option('verbose')) {
 				return;
 			}
-			return [shorten(row[0]), prettyMs(row[1]), createBar(avg)];
+			return [shorten(row[0]), chalk.blue(prettyMs(row[1])), chalk.blue(createBar(avg))];
 		}).reduce(function (acc, row) {
 			if (row) {
 				acc.push(row);
@@ -117,7 +117,7 @@ module.exports = function (grunt) {
 			return acc;
 		}, []);
 
-		tableDataProcessed.push([chalk.bold('Total', prettyMs(totalTime))]);
+		tableDataProcessed.push([chalk.bold.blue('Total', prettyMs(totalTime))]);
 
 		return table(tableDataProcessed, {
 			align: [ 'l', 'r', 'l' ],
@@ -144,7 +144,7 @@ module.exports = function (grunt) {
 
 		// `grunt.log.header` should be unhooked above, but in some cases it's not
 		log('\n\n' + chalk.underline('Execution Time') + chalk.gray(' (' + startTimePretty + ')'));
-		log(formatTable(tableData));
+		log(formatTable(tableData) + '\n');
 		process.exit(exitCode);
 	});
 };
