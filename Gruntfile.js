@@ -7,7 +7,7 @@ module.exports = function (grunt) {
 	var match = false;
 
 	grunt.util.hooker.hook(process.stdout, 'write', function (str) {
-		if (/Total/.test(str)) {
+		if (/Total/.test(str) && (grunt.option('average') === undefined || (/sigint/.test(grunt.cli.tasks[0]) || /Average/.test(str)))) {
 			match = true;
 		}
 	});

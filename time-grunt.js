@@ -20,13 +20,14 @@ module.exports = function (grunt) {
 	var prevTime = startTime;
 	var prevTaskName = 'loading tasks';
 	var tableData = [];
+	var showAverage = argv.indexOf('--average') !== -1 || argv.indexOf('-a') !== -1;
 
 	if (argv.indexOf('--help') !== -1 ||
-	    argv.indexOf('-h') !== -1 ||
-	    argv.indexOf('--version') !== -1 ||
-	    argv.indexOf('-V') !== -1 ||
-	    argv.indexOf('--verbose') !== -1 ||
-	    argv.indexOf('--v') !== -1) {
+		argv.indexOf('-h') !== -1 ||
+		argv.indexOf('--version') !== -1 ||
+		argv.indexOf('-V') !== -1 ||
+		argv.indexOf('--verbose') !== -1 ||
+		argv.indexOf('--v') !== -1) {
 		return;
 	}
 
@@ -116,6 +117,14 @@ module.exports = function (grunt) {
 			}
 			return acc;
 		}, []);
+
+		if (showAverage && tableDataProcessed.length && tableDataProcessed.length > 2 && tableData.length) {
+			var avgTime = totalTime / (tableDataProcessed.length);
+
+			var avg = 1 / (tableDataProcessed.length);
+
+			tableDataProcessed.push([chalk.italic.cyan('Average'), chalk.italic.cyan(prettyMs(avgTime)), chalk.cyan(createBar(avg))]);
+		}
 
 		tableDataProcessed.push([chalk.bold.blue('Total', prettyMs(totalTime))]);
 

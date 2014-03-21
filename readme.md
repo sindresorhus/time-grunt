@@ -32,6 +32,16 @@ Tasks that take less than 1% of the total time are hidden to reduce clutter.
 
 Run grunt with `grunt --verbose` to see all tasks.
 
+## Show average
+
+If you are testing performance it's nice to show the average performance of the tasks. 
+
+
+```grunt --average``` or ```grunt -a```
+
+![screenshot](averagescreenshot.png)
+
+_Catch: Fewer then 3 tasks will not show *average* at any given time._
 
 ## License
 
