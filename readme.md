@@ -10,7 +10,7 @@
 Install with [npm](https://npmjs.org/package/time-grunt)
 
 ```
-npm install --save time-grunt
+npm install --save-dev time-grunt
 ```
 
 
