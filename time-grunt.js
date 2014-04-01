@@ -12,8 +12,9 @@ function log(str) {
 	write(str + '\n', 'utf8')
 }
 
-module.exports = function (grunt) {
-	var BAR_CHAR = process.platform === 'win32' ? '■' : '▇';
+module.exports = function (grunt, options) {
+	options = options || {};
+	var BAR_CHAR = options.barChar || (process.platform === 'win32' ? '■' : '▇');
 	var now = new Date();
 	var startTimePretty = dateTime();
 	var startTime = now.getTime();
