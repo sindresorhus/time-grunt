@@ -1,4 +1,4 @@
-# time-grunt [![Build Status](https://secure.travis-ci.org/sindresorhus/time-grunt.png?branch=master)](http://travis-ci.org/sindresorhus/time-grunt) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+# time-grunt [![Build Status](https://travis-ci.org/sindresorhus/time-grunt.svg?branch=master)](https://travis-ci.org/sindresorhus/time-grunt)
 
 > Displays the execution time of [grunt](http://gruntjs.com) tasks
 
@@ -7,14 +7,12 @@
 
 ## Install
 
-Install with [npm](https://npmjs.org/package/time-grunt)
-
-```
-npm install --save-dev time-grunt
+```bash
+$ npm install --save-dev time-grunt
 ```
 
 
-## Example
+## Usage
 
 ```js
 // Gruntfile.js
@@ -26,6 +24,7 @@ module.exports = function (grunt) {
 }
 ```
 
+
 ## Clean layout
 
 Tasks that take less than 1% of the total time are hidden to reduce clutter.
@@ -35,4 +34,4 @@ Run grunt with `grunt --verbose` to see all tasks.
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+[MIT](http://opensource.org/licenses/MIT) © [Sindre Sorhus](http://sindresorhus.com)
