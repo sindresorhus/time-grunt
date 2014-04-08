@@ -23,6 +23,8 @@ module.exports = function (grunt) {
 	grunt.initConfig();
 }
 ```
+You can also adjust the colors used for output - the color strings correspond
+to the colors implemented in [chalk](https://www.npmjs.org/package/chalk).
 
 ```js
 // Gruntfile.js with color adjustments
