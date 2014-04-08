@@ -1,6 +1,6 @@
 {
   "name": "time-grunt",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Displays the elapsed execution time of grunt tasks when done",
   "keywords": [
     "grunt",
@@ -28,7 +28,8 @@
     "text-table": "^0.2.0",
     "hooker": "^0.2.3",
     "date-time": "^0.1.0",
-    "pretty-ms": "^0.1.0"
+    "pretty-ms": "^0.1.0",
+    "lodash": "^2.4.1"
   },
   "devDependencies": {
     "grunt": "^0.4.2"
