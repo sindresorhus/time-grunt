@@ -23,6 +23,23 @@ module.exports = function (grunt) {
 	grunt.initConfig();
 }
 ```
+You can also adjust the colors used for output - the color strings correspond
+to the colors implemented in [chalk](https://www.npmjs.org/package/chalk).
+
+```js
+// Gruntfile.js with color adjustments
+modules.exports = function(grunt) {
+	//require it at the top and pass in the grunt instance and color entries
+	require('time-grunt')(grunt, {
+	        timestamp_color: 'yellow',
+        	time_color: 'magenta',
+        	bar_color: 'cyan',
+        	total_color: 'red'
+ 	});
+
+	grunt.initConfig();
+}
+```
 
 
 ## Clean layout

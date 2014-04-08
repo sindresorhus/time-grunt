@@ -1,4 +1,5 @@
 'use strict';
+var _ = require ('lodash');
 var chalk = require('chalk');
 var table = require('text-table');
 var hooker = require('hooker');
@@ -12,7 +13,7 @@ function log(str) {
 	write(str + '\n', 'utf8')
 }
 
-module.exports = function (grunt) {
+module.exports = function (grunt,options) {
 	var BAR_CHAR = process.platform === 'win32' ? '■' : '▇';
 	var now = new Date();
 	var startTimePretty = dateTime();
@@ -20,6 +21,20 @@ module.exports = function (grunt) {
 	var prevTime = startTime;
 	var prevTaskName = 'loading tasks';
 	var tableData = [];
+	var defaults = {
+	    time_color: 'blue',
+	    bar_color: 'blue',
+	    total_color: 'bold.blue',
+	    timestamp_color: 'gray'
+	};
+
+	options = _.extend({}, defaults, options);
+
+        var timestamp_color_func = eval('chalk.' + options.timestamp_color);
+	var time_color_func = eval('chalk.' + options.time_color);
+	var bar_color_func = eval('chalk.' + options.bar_color);
+	var total_color_func = eval('chalk.bold.' + options.total_color);
+
 
 	if (argv.indexOf('--help') !== -1 ||
 	    argv.indexOf('-h') !== -1 ||
@@ -108,7 +123,7 @@ module.exports = function (grunt) {
 			if (avg < 0.01 && !grunt.option('verbose')) {
 				return;
 			}
-			return [shorten(row[0]), chalk.blue(prettyMs(row[1])), chalk.blue(createBar(avg))];
+			return [shorten(row[0]), time_color_func(prettyMs(row[1])), bar_color_func(createBar(avg))];
 		}).reduce(function (acc, row) {
 			if (row) {
 				acc.push(row);
@@ -117,7 +132,7 @@ module.exports = function (grunt) {
 			return acc;
 		}, []);
 
-		tableDataProcessed.push([chalk.bold.blue('Total', prettyMs(totalTime))]);
+		tableDataProcessed.push([total_color_func('Total', prettyMs(totalTime))]);
 
 		return table(tableDataProcessed, {
 			align: [ 'l', 'r', 'l' ],
@@ -143,7 +158,7 @@ module.exports = function (grunt) {
 		}
 
 		// `grunt.log.header` should be unhooked above, but in some cases it's not
-		log('\n\n' + chalk.underline('Execution Time') + chalk.gray(' (' + startTimePretty + ')'));
+		log('\n\n' + chalk.underline('Execution Time') + timestamp_color_func(' (' + startTimePretty + ')'));
 		log(formatTable(tableData) + '\n');
 		process.exit(exitCode);
 	});
