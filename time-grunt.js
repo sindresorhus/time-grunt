@@ -108,7 +108,7 @@ module.exports = function (grunt) {
 			if (avg < 0.01 && !grunt.option('verbose')) {
 				return;
 			}
-			return [shorten(row[0]), chalk.blue(prettyMs(row[1])), chalk.blue(createBar(avg))];
+			return [shorten(row[0]), chalk.cyan(prettyMs(row[1])), chalk.cyan(createBar(avg))];
 		}).reduce(function (acc, row) {
 			if (row) {
 				acc.push(row);
@@ -117,7 +117,7 @@ module.exports = function (grunt) {
 			return acc;
 		}, []);
 
-		tableDataProcessed.push([chalk.bold.blue('Total', prettyMs(totalTime))]);
+		tableDataProcessed.push([chalk.bold.cyan('Total', prettyMs(totalTime))]);
 
 		return table(tableDataProcessed, {
 			align: [ 'l', 'r', 'l' ],
