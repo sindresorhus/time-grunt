@@ -12,7 +12,6 @@ module.exports = function (grunt) {
 		}
 	});
 
-
 	require('./time-grunt')(grunt);
 
 	grunt.registerTask('test', function () {
@@ -42,6 +41,20 @@ module.exports = function (grunt) {
 		}, 21);
 	});
 
+	var maxColumns = process.stdout.columns || 80;
+	var maxBarWidth = (maxColumns - 20) / 2;
+
+	var nondotted = new Array(Math.ceil(maxBarWidth)).join('a');
+	var dotted = new Array(Math.ceil(maxBarWidth) + 1).join('b');
+
+	grunt.registerTask(nondotted, function () {
+		setTimeout(this.async(), 22);
+	});
+
+	grunt.registerTask(dotted, function () {
+		setTimeout(this.async(), 22);
+	});
+
 	grunt.registerTask('default', [
 		'test',
 		'test2',
@@ -53,6 +66,11 @@ module.exports = function (grunt) {
 	grunt.registerTask('sigint', [
 		'test',
 		'testsigint'
+	]);
+
+	grunt.registerTask('evenodd', [
+		nondotted,
+		dotted
 	]);
 
 	process.on('exit', function () {
