@@ -12,7 +12,7 @@ function log(str) {
 	write(str + '\n', 'utf8')
 }
 
-module.exports = function (grunt) {
+module.exports = function (grunt, exclude) {
 	var BAR_CHAR = process.platform === 'win32' ? '■' : '▇';
 	var now = new Date();
 	var startTimePretty = dateTime();
@@ -20,6 +20,7 @@ module.exports = function (grunt) {
 	var prevTime = startTime;
 	var prevTaskName = 'loading tasks';
 	var tableData = [];
+	var exclude = exclude || [];
 
 	if (argv.indexOf('--help') !== -1 ||
 	    argv.indexOf('-h') !== -1 ||
@@ -49,6 +50,10 @@ module.exports = function (grunt) {
 	hooker.hook(grunt.log, 'header', function () {
 		var name = grunt.task.current.nameArgs;
 		var diff = Date.now() - prevTime;
+
+		if (exclude.indexOf(name) !== -1) {
+			return;
+		}
 
 		if (prevTaskName && prevTaskName !== name) {
 			tableData.push([prevTaskName, diff]);
