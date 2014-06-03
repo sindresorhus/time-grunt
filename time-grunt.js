@@ -22,9 +22,9 @@ module.exports = function (grunt) {
 	var tableData = [];
 
 	if (argv.indexOf('--help') !== -1 ||
-	    argv.indexOf('-h') !== -1 ||
-	    argv.indexOf('--version') !== -1 ||
-	    argv.indexOf('-V') !== -1 {
+		argv.indexOf('-h') !== -1 ||
+		argv.indexOf('--version') !== -1 ||
+		argv.indexOf('-V') !== -1) {
 		return;
 	}
 
