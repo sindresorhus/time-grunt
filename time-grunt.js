@@ -9,7 +9,7 @@ var argv = process.argv;
 var write = process.stdout.write.bind(process.stdout);
 
 function log(str) {
-	write(str + '\n', 'utf8')
+	write(str + '\n', 'utf8');
 }
 
 module.exports = function (grunt) {
