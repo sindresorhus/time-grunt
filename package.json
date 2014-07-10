@@ -24,11 +24,12 @@
     "test": "grunt && grunt sigint"
   },
   "dependencies": {
-    "chalk": "^0.4.0",
-    "text-table": "^0.2.0",
-    "hooker": "^0.2.3",
+    "chalk": "^0.5.1",
     "date-time": "^0.1.0",
-    "pretty-ms": "^0.1.0"
+    "figures": "^1.0.0",
+    "hooker": "^0.2.3",
+    "pretty-ms": "^0.2.2",
+    "text-table": "^0.2.0"
   },
   "devDependencies": {
     "grunt": "^0.4.2"

@@ -4,6 +4,7 @@ var table = require('text-table');
 var hooker = require('hooker');
 var dateTime = require('date-time');
 var prettyMs = require('pretty-ms');
+var barChar = require('figures').square;
 var argv = process.argv;
 
 var write = process.stdout.write.bind(process.stdout);
@@ -13,7 +14,6 @@ function log(str) {
 }
 
 module.exports = function (grunt) {
-	var BAR_CHAR = process.platform === 'win32' ? '■' : '▇';
 	var now = new Date();
 	var startTimePretty = dateTime();
 	var startTime = now.getTime();
@@ -97,7 +97,7 @@ module.exports = function (grunt) {
 			}
 
 			var barLength = Math.ceil(maxBarWidth * percentage) + 1;
-			var bar = new Array(barLength).join(BAR_CHAR);
+			var bar = new Array(barLength).join(barChar);
 			return bar + ' ' + rounded + '%';
 		}
 
