@@ -36,7 +36,7 @@ module.exports = function (grunt) {
 	function exit(exitCode) {
 		clearInterval(interval);
 		process.emit('timegruntexit', exitCode);
-		exit = function() {};
+		exit = function () {};
 	}
 
 	var interval = setInterval(function () {
@@ -115,7 +115,7 @@ module.exports = function (grunt) {
 			return acc;
 		}, []);
 
-		tableDataProcessed.push([chalk.bold.blue('Total', prettyMs(totalTime))]);
+		tableDataProcessed.push([chalk.magenta('Total', prettyMs(totalTime))]);
 
 		return table(tableDataProcessed, {
 			align: [ 'l', 'r', 'l' ],
