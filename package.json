@@ -1,7 +1,7 @@
 {
   "name": "time-grunt",
   "version": "0.4.0",
-  "description": "Displays the elapsed execution time of grunt tasks when done",
+  "description": "Display the elapsed execution time of grunt tasks",
   "keywords": [
     "grunt",
     "tasks",
@@ -16,23 +16,23 @@
     "url": "http://sindresorhus.com"
   },
   "files": [
-    "time-grunt.js"
+    "index.js"
   ],
-  "main": "time-grunt.js",
   "repository": "sindresorhus/time-grunt",
   "scripts": {
     "test": "grunt && grunt sigint"
   },
   "dependencies": {
     "chalk": "^0.5.1",
-    "date-time": "^0.1.0",
+    "date-time": "^1.0.0",
     "figures": "^1.0.0",
     "hooker": "^0.2.3",
-    "pretty-ms": "^0.2.2",
+    "pretty-ms": "^1.0.0",
     "text-table": "^0.2.0"
   },
   "devDependencies": {
-    "grunt": "^0.4.2"
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13"
   },
   "engines": {
     "node": ">=0.10.0"

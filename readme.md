@@ -1,18 +1,15 @@
 # time-grunt [![Build Status](https://travis-ci.org/sindresorhus/time-grunt.svg?branch=master)](https://travis-ci.org/sindresorhus/time-grunt)
 
-> Displays the execution time of [grunt](http://gruntjs.com) tasks
+> Display the elapsed execution time of [grunt](http://gruntjs.com) tasks
 
 ![screenshot](screenshot.png)
 
 
-## Install
+## Usage
 
-```bash
+```sh
 $ npm install --save-dev time-grunt
 ```
-
-
-## Usage
 
 ```js
 // Gruntfile.js
@@ -34,4 +31,4 @@ Run grunt with `grunt --verbose` to see all tasks.
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](http://sindresorhus.com)

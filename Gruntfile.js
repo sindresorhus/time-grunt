@@ -2,7 +2,6 @@
 var assert = require('assert');
 
 module.exports = function (grunt) {
-
 	// tests
 	var match = false;
 
@@ -12,8 +11,7 @@ module.exports = function (grunt) {
 		}
 	});
 
-
-	require('./time-grunt')(grunt);
+	require('./')(grunt);
 
 	grunt.registerTask('test', function () {
 		setTimeout(this.async(), 1200);
