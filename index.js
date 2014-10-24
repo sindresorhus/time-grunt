@@ -1,19 +1,21 @@
 'use strict';
-var chalk = require('chalk');
-var table = require('text-table');
-var hooker = require('hooker');
-var dateTime = require('date-time');
-var prettyMs = require('pretty-ms');
-var barChar = require('figures').square;
-var argv = process.argv.slice(2);
 
-var write = process.stdout.write.bind(process.stdout);
+module.exports = function (grunt, options) {
 
-function log(str) {
-	write(str + '\n', 'utf8');
-}
+  var chalk = require('chalk');
+  var table = require('text-table');
+  var hooker = require('hooker');
+  var dateTime = require('date-time');
+  var prettyMs = require('pretty-ms');
+  var barChar = require('figures').square;
+  var argv = process.argv.slice(2);
 
-module.exports = function (grunt) {
+  var write = process.stdout.write.bind(process.stdout);
+
+  function log(str) {
+    write(str + '\n', 'utf8');
+  }
+
 	var now = new Date();
 	var startTimePretty = dateTime();
 	var startTime = now.getTime();
@@ -28,6 +30,25 @@ module.exports = function (grunt) {
 		return;
 	}
 
+  
+  // support for customize color
+  var chalkBar = chalk.blue,
+      chalkTotalTime = chalk.magenta,
+      chalkExecutionTime = chalk.gray;
+  if("object" == typeof options)
+  {
+    if("string" == typeof options.bar && options.bar.length > 1)
+      chalkBar = eval("chalk." + options.bar);
+    chalkBar = chalkBar || chalk.blue;
+    if("string" == typeof options.TotalTime && options.TotalTime.length > 1)
+      chalkTotalTime = eval("chalk." + options.TotalTime);
+    chalkTotalTime = chalkTotalTime || chalk.magenta;
+    if("string" == typeof options.ExecutionTime && options.ExecutionTime.length > 1)
+      chalkExecutionTime = eval("chalk." + options.ExecutionTime);
+    chalkExecutionTime = chalkExecutionTime || chalk.gray;
+  }
+  
+  
 	// crazy hack to work around stupid node-exit
 	// Can this be removed now that node-exit#4 has been resolved?
 	// https://github.com/cowboy/node-exit/issues/4
@@ -106,7 +127,7 @@ module.exports = function (grunt) {
 			if (avg < 0.01 && !grunt.option('verbose')) {
 				return;
 			}
-			return [shorten(row[0]), chalk.blue(prettyMs(row[1])), chalk.blue(createBar(avg))];
+			return [shorten(row[0]), chalkBar(prettyMs(row[1])), chalkBar(createBar(avg))];
 		}).reduce(function (acc, row) {
 			if (row) {
 				acc.push(row);
@@ -115,7 +136,7 @@ module.exports = function (grunt) {
 			return acc;
 		}, []);
 
-		tableDataProcessed.push([chalk.magenta('Total', prettyMs(totalTime))]);
+		tableDataProcessed.push([chalkTotalTime('Total', prettyMs(totalTime))]);
 
 		return table(tableDataProcessed, {
 			align: [ 'l', 'r', 'l' ],
@@ -141,7 +162,7 @@ module.exports = function (grunt) {
 		}
 
 		// `grunt.log.header` should be unhooked above, but in some cases it's not
-		log('\n\n' + chalk.underline('Execution Time') + chalk.gray(' (' + startTimePretty + ')'));
+		log('\n\n' + chalk.underline('Execution Time') + chalkExecutionTime(' (' + startTimePretty + ')'));
 		log(formatTable(tableData) + '\n');
 		process.exit(exitCode);
 	});
