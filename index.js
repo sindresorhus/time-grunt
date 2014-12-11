@@ -140,6 +140,12 @@ module.exports = function (grunt) {
 			tableData.push([prevTaskName, diff]);
 		}
 
+		try {
+			grunt.file.write("build/report-time.json", JSON.stringify(tableData));
+		} catch (e) {
+			write("Error: can't save timing report");
+		}
+
 		// `grunt.log.header` should be unhooked above, but in some cases it's not
 		log('\n\n' + chalk.underline('Execution Time') + chalk.gray(' (' + startTimePretty + ')'));
 		log(formatTable(tableData) + '\n');
