@@ -13,7 +13,7 @@ function log(str) {
 	write(str + '\n', 'utf8');
 }
 
-module.exports = function (grunt) {
+module.exports = function (grunt, options) {
 	var now = new Date();
 	var startTimePretty = dateTime();
 	var startTime = now.getTime();
@@ -138,6 +138,14 @@ module.exports = function (grunt) {
 		var diff = Date.now() - prevTime;
 		if (prevTaskName) {
 			tableData.push([prevTaskName, diff]);
+		}
+
+		if (options && options.exportPath) {
+			try {
+				grunt.file.write(options.exportPath, JSON.stringify(tableData));
+			} catch (e) {
+				log("Error: can't save timing report");
+			}
 		}
 
 		// `grunt.log.header` should be unhooked above, but in some cases it's not
