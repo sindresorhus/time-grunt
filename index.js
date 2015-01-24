@@ -13,7 +13,19 @@ function log(str) {
 	write(str + '\n', 'utf8');
 }
 
-module.exports = function (grunt) {
+module.exports = function (grunt, options) {
+	var colors = {
+		progressBar: 'blue',
+		totalTime: 'magenta',
+		executionTime: 'gray'
+	};
+
+	if (options) {
+		if (options.colors.progressBar) colors.progressBar = options.colors.progressBar;
+		if (options.colors.total) colors.total = options.colors.total;
+		if (options.colors.executionTime) colors.executionTime = options.colors.executionTime;
+	}
+
 	var now = new Date();
 	var startTimePretty = dateTime();
 	var startTime = now.getTime();
@@ -106,7 +118,7 @@ module.exports = function (grunt) {
 			if (avg < 0.01 && !grunt.option('verbose')) {
 				return;
 			}
-			return [shorten(row[0]), chalk.blue(prettyMs(row[1])), chalk.blue(createBar(avg))];
+			return [shorten(row[0]), chalk[colors.progressBar](prettyMs(row[1])), chalk[colors.progressBar](createBar(avg))];
 		}).reduce(function (acc, row) {
 			if (row) {
 				acc.push(row);
@@ -115,7 +127,7 @@ module.exports = function (grunt) {
 			return acc;
 		}, []);
 
-		tableDataProcessed.push([chalk.magenta('Total', prettyMs(totalTime))]);
+		tableDataProcessed.push([chalk[colors.totalTime]('Total', prettyMs(totalTime))]);
 
 		return table(tableDataProcessed, {
 			align: [ 'l', 'r', 'l' ],
@@ -141,7 +153,7 @@ module.exports = function (grunt) {
 		}
 
 		// `grunt.log.header` should be unhooked above, but in some cases it's not
-		log('\n\n' + chalk.underline('Execution Time') + chalk.gray(' (' + startTimePretty + ')'));
+		log('\n\n' + chalk.underline('Execution Time') + chalk[colors.executionTime](' (' + startTimePretty + ')'));
 		log(formatTable(tableData) + '\n');
 		process.exit(exitCode);
 	});
