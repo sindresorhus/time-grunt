@@ -20,7 +20,24 @@ module.exports = function (grunt) {
 	grunt.initConfig();
 }
 ```
+or with options
+```js
+// Gruntfile.js
+module.exports = function (grunt) {
+	// require it at the top and pass in the grunt instance
+	require('time-grunt')(grunt, {
+		colors: {
+			progressBar: 'red'
+		}
+	});
 
+	grunt.initConfig();
+}
+```
+
+## Options [optional]
+
++ **colors:** - If you want to change color of elements use this property. Allows colors: **progressBar** - default blue, **totalTime** - default magenta, **executionTime** - default gray
 
 ## Clean layout
 
