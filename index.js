@@ -23,6 +23,8 @@ module.exports = function (grunt) {
 
 	if (argv.indexOf('--help') !== -1 ||
 		argv.indexOf('-h') !== -1 ||
+		argv.indexOf('--quiet') !== -1 ||
+		argv.indexOf('-q') !== -1 ||
 		argv.indexOf('--version') !== -1 ||
 		argv.indexOf('-V') !== -1) {
 		return;
