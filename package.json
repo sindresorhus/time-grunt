@@ -23,7 +23,7 @@
     "test": "grunt && grunt sigint"
   },
   "dependencies": {
-    "chalk": "^0.5.1",
+    "chalk": "^1.0.0",
     "date-time": "^1.0.0",
     "figures": "^1.0.0",
     "hooker": "^0.2.3",
