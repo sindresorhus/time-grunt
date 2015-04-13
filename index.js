@@ -106,7 +106,7 @@ module.exports = function (grunt) {
 
 		var tableDataProcessed = tableData.map(function (row) {
 			var avg = row[1] / totalTime;
-			if (avg < 0.01 && !grunt.option('verbose')) {
+			if (isNaN(avg) ||  (avg < 0.01 && !grunt.option('verbose'))) {
 				return;
 			}
 			return [shorten(row[0]), chalk.blue(prettyMs(row[1])), chalk.blue(createBar(avg))];
