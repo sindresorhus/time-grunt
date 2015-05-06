@@ -21,6 +21,19 @@ module.exports = function (grunt) {
 }
 ```
 
+## Optional Callback
+
+If you want to collect the timing stats for your own use, pass a callback to time-grunt:
+
+```js
+require('time-grunt')(grunt, function (stats, done) {
+	// do whatever you want with the stats
+	uploadReport(stats);
+	
+	// be sure to let grunt know when to exit
+	done();
+});
+```
 
 ## Clean layout
 
