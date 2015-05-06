@@ -1,5 +1,4 @@
 'use strict';
-var assert = require('assert');
 
 module.exports = function (grunt) {
 	// tests
@@ -35,7 +34,7 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('testsigint', function () {
 		this.async();
-		setTimeout(function() {
+		setTimeout(function () {
 			process.emit('SIGINT');
 		}, 21);
 	});

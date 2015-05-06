@@ -5,11 +5,14 @@
 ![screenshot](screenshot.png)
 
 
-## Usage
+## Install
 
-```sh
+```
 $ npm install --save-dev time-grunt
 ```
+
+
+## Usage
 
 ```js
 // Gruntfile.js
@@ -20,6 +23,7 @@ module.exports = function (grunt) {
 	grunt.initConfig();
 }
 ```
+
 
 ## Optional Callback
 
@@ -34,6 +38,7 @@ require('time-grunt')(grunt, function (stats, done) {
 	done();
 });
 ```
+
 
 ## Clean layout
 

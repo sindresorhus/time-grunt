@@ -6,7 +6,6 @@ var dateTime = require('date-time');
 var prettyMs = require('pretty-ms');
 var barChar = require('figures').square;
 var argv = process.argv.slice(2);
-
 var write = process.stdout.write.bind(process.stdout);
 
 function log(str) {
@@ -45,6 +44,7 @@ module.exports = function (grunt, cb) {
 	var interval = setInterval(function () {
 		process.exit = exit;
 	}, 100);
+
 	process.exit = exit;
 
 	hooker.hook(grunt.log, 'header', function () {
@@ -61,12 +61,13 @@ module.exports = function (grunt, cb) {
 
 	function formatTable(tableData) {
 		var totalTime = Date.now() - startTime;
-
 		var longestTaskName = tableData.reduce(function (acc, row) {
 			var avg = row[1] / totalTime;
+
 			if (avg < 0.01 && !grunt.option('verbose')) {
 				return acc;
 			}
+
 			return Math.max(acc, row[0].length);
 		}, 0);
 
@@ -89,6 +90,7 @@ module.exports = function (grunt, cb) {
 			var partLength = Math.floor((maxBarWidth - 3) / 2);
 			var start = taskName.substr(0, partLength + 1);
 			var end = taskName.substr(nameLength - partLength);
+
 			return start.trim() + '...' + end.trim();
 		}
 
@@ -101,27 +103,31 @@ module.exports = function (grunt, cb) {
 
 			var barLength = Math.ceil(maxBarWidth * percentage) + 1;
 			var bar = new Array(barLength).join(barChar);
+
 			return bar + ' ' + rounded + '%';
 		}
 
 		var tableDataProcessed = tableData.map(function (row) {
 			var avg = row[1] / totalTime;
+
 			if (isNaN(avg) ||  (avg < 0.01 && !grunt.option('verbose'))) {
 				return;
 			}
+
 			return [shorten(row[0]), chalk.blue(prettyMs(row[1])), chalk.blue(createBar(avg))];
 		}).reduce(function (acc, row) {
 			if (row) {
 				acc.push(row);
 				return acc;
 			}
+
 			return acc;
 		}, []);
 
 		tableDataProcessed.push([chalk.magenta('Total', prettyMs(totalTime))]);
 
 		return table(tableDataProcessed, {
-			align: [ 'l', 'r', 'l' ],
+			align: ['l', 'r', 'l'],
 			stringLength: function (str) {
 				return chalk.stripColor(str).length;
 			}
@@ -134,11 +140,12 @@ module.exports = function (grunt, cb) {
 
 	process.once('timegruntexit', function (exitCode) {
 		clearInterval(interval);
-		process.exit = originalExit;
 
+		process.exit = originalExit;
 		hooker.unhook(grunt.log, 'header');
 
 		var diff = Date.now() - prevTime;
+
 		if (prevTaskName) {
 			tableData.push([prevTaskName, diff]);
 		}
@@ -146,13 +153,15 @@ module.exports = function (grunt, cb) {
 		// `grunt.log.header` should be unhooked above, but in some cases it's not
 		log('\n\n' + chalk.underline('Execution Time') + chalk.gray(' (' + startTimePretty + ')'));
 		log(formatTable(tableData) + '\n');
-		
+
 		if (cb) {
 			cb(tableData, function () {
 				process.exit(exitCode);
 			});
+
 			return;
 		}
+
 		process.exit(exitCode);
 	});
 };
