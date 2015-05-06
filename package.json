@@ -7,13 +7,18 @@
     "tasks",
     "measure",
     "time",
-    "profile"
+    "profile",
+    "stat",
+    "stats",
+    "perf",
+    "performance",
+    "tasks"
   ],
   "license": "MIT",
   "author": {
     "name": "Sindre Sorhus",
     "email": "sindresorhus@gmail.com",
-    "url": "http://sindresorhus.com"
+    "url": "sindresorhus.com"
   },
   "files": [
     "index.js"

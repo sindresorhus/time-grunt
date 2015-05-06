@@ -2,7 +2,7 @@
 
 > Display the elapsed execution time of [grunt](http://gruntjs.com) tasks
 
-![screenshot](screenshot.png)
+![](screenshot.png)
 
 
 ## Install
@@ -25,15 +25,15 @@ module.exports = function (grunt) {
 ```
 
 
-## Optional Callback
+## Optional callback
 
-If you want to collect the timing stats for your own use, pass a callback to time-grunt:
+If you want to collect the timing stats for your own use, pass in a callback:
 
 ```js
 require('time-grunt')(grunt, function (stats, done) {
 	// do whatever you want with the stats
 	uploadReport(stats);
-	
+
 	// be sure to let grunt know when to exit
 	done();
 });
