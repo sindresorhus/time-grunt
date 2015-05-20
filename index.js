@@ -4,6 +4,7 @@ var table = require('text-table');
 var hooker = require('hooker');
 var dateTime = require('date-time');
 var prettyMs = require('pretty-ms');
+var numberIsNan = require('number-is-nan');
 var barChar = require('figures').square;
 var argv = process.argv.slice(2);
 var write = process.stdout.write.bind(process.stdout);
@@ -110,7 +111,7 @@ module.exports = function (grunt, cb) {
 		var tableDataProcessed = tableData.map(function (row) {
 			var avg = row[1] / totalTime;
 
-			if (isNaN(avg) ||  (avg < 0.01 && !grunt.option('verbose'))) {
+			if (numberIsNan(avg) ||  (avg < 0.01 && !grunt.option('verbose'))) {
 				return;
 			}
 
