@@ -40,11 +40,20 @@ require('time-grunt')(grunt, function (stats, done) {
 ```
 
 
+## Optional ignored tasks
+
+If you want to exclude certain grunt tasks (e.g. watch) from appearing in the output, you may pass them in via an array:
+
+```js
+require('time-grunt')(grunt, undefined, ['watch']);
+```
+
+
 ## Clean layout
 
 Tasks that take less than 1% of the total time are hidden to reduce clutter.
 
-Run grunt with `grunt --verbose` to see all tasks.
+Run grunt with `grunt --verbose` to see all tasks, including ignored ones.
 
 
 ## License
