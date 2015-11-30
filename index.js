@@ -13,7 +13,7 @@ function log(str) {
 	write(str + '\n', 'utf8');
 }
 
-module.exports = function (grunt, cb) {
+module.exports = function (grunt, cb, ignores) {
 	var now = new Date();
 	var startTimePretty = dateTime();
 	var startTime = now.getTime();
@@ -110,6 +110,14 @@ module.exports = function (grunt, cb) {
 
 		var tableDataProcessed = tableData.map(function (row) {
 			var avg = row[1] / totalTime;
+
+			if (ignores && !grunt.option('verbose')) { // Array of task names to exclude from output
+				for (var i = 0, len = ignores.length; i < len; i++) {
+					if (row[0] === ignores[i]) {
+						return;
+					}
+				}
+			}
 
 			if (numberIsNan(avg) ||  (avg < 0.01 && !grunt.option('verbose'))) {
 				return;
