@@ -111,7 +111,7 @@ module.exports = function (grunt, cb, ignores) {
 		var tableDataProcessed = tableData.map(function (row) {
 			var avg = row[1] / totalTime;
 
-			if (ignores) { // Array of task names to exclude from output
+			if (ignores && !grunt.option('verbose')) { // Array of task names to exclude from output
 				for (var i = 0, len = ignores.length; i < len; i++) {
 					if (row[0] === ignores[i]) {
 						return;
