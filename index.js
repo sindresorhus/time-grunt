@@ -111,6 +111,12 @@ module.exports = function (grunt, cb) {
 		var tableDataProcessed = tableData.map(function (row) {
 			var avg = row[1] / totalTime;
 
+			// Issue 51: Ignore watch task, or tasks beginning with 'watch:'
+			var ignoreTask = 'watch';
+			if (!grunt.option('verbose') && (row[0] === ignoreTask || row[0].lastIndexOf(ignoreTask + ':', 0) === 0)) {
+				return;
+			}
+
 			if (numberIsNan(avg) ||  (avg < 0.01 && !grunt.option('verbose'))) {
 				return;
 			}

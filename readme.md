@@ -24,6 +24,8 @@ module.exports = function (grunt) {
 }
 ```
 
+**Note:** The 'watch' task (and tasks beginning with 'watch:') are ignored by default. They may be included by using `grunt --verbose`.
+
 
 ## Optional callback
 
