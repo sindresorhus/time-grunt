@@ -16,7 +16,7 @@ $ npm install --save-dev time-grunt
 
 ```js
 // Gruntfile.js
-module.exports = function (grunt) {
+module.exports = grunt => {
 	// require it at the top and pass in the grunt instance
 	require('time-grunt')(grunt);
 
@@ -24,15 +24,13 @@ module.exports = function (grunt) {
 }
 ```
 
-**Note:** The 'watch' task is ignored by default. It may be included by using `grunt --verbose`.
-
 
 ## Optional callback
 
 If you want to collect the timing stats for your own use, pass in a callback:
 
 ```js
-require('time-grunt')(grunt, function (stats, done) {
+require('time-grunt')(grunt, (stats, done) => {
 	// do whatever you want with the stats
 	uploadReport(stats);
 
@@ -44,7 +42,7 @@ require('time-grunt')(grunt, function (stats, done) {
 
 ## Clean layout
 
-Tasks that take less than 1% of the total time are hidden to reduce clutter.
+The `watch` task and tasks that take less than 1% of the total time are hidden to reduce clutter.
 
 Run grunt with `grunt --verbose` to see all tasks.
 

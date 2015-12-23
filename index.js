@@ -36,13 +36,15 @@ module.exports = function (grunt, cb) {
 	// https://github.com/cowboy/node-exit/issues/4
 	var originalExit = process.exit;
 
-	function exit(exitCode) {
+	var interval;
+
+	var exit = function (exitCode) {
 		clearInterval(interval);
 		process.emit('timegruntexit', exitCode);
 		exit = function () {};
-	}
+	};
 
-	var interval = setInterval(function () {
+	interval = setInterval(function () {
 		process.exit = exit;
 	}, 100);
 
@@ -113,11 +115,11 @@ module.exports = function (grunt, cb) {
 
 			// hide the watch task
 			if (!grunt.option('verbose') && /^watch($|:)/.test(row[0])) {
-				return;
+				return null;
 			}
 
-			if (numberIsNan(avg) ||  (avg < 0.01 && !grunt.option('verbose'))) {
-				return;
+			if (numberIsNan(avg) || (avg < 0.01 && !grunt.option('verbose'))) {
+				return null;
 			}
 
 			return [shorten(row[0]), chalk.blue(prettyMs(row[1])), chalk.blue(createBar(avg))];
