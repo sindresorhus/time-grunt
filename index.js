@@ -111,6 +111,11 @@ module.exports = function (grunt, cb) {
 		var tableDataProcessed = tableData.map(function (row) {
 			var avg = row[1] / totalTime;
 
+			// hide the watch task
+			if (!grunt.option('verbose') && /^watch($|:)/.test(row[0])) {
+				return;
+			}
+
 			if (numberIsNan(avg) ||  (avg < 0.01 && !grunt.option('verbose'))) {
 				return;
 			}

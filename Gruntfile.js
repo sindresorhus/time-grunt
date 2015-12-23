@@ -39,12 +39,17 @@ module.exports = function (grunt) {
 		}, 21);
 	});
 
+	grunt.registerTask('watch', function () {
+		setTimeout(this.async(), 50);
+	});
+
 	grunt.registerTask('default', [
 		'test',
 		'test2',
 		'This is a really long task name',
 		'This is the longest but very quick task name',
-		'This is a really long task name which is cropped in the middle'
+		'This is a really long task name which is cropped in the middle',
+		'watch'
 	]);
 
 	grunt.registerTask('sigint', [
