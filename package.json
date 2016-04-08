@@ -27,6 +27,9 @@
   "scripts": {
     "test": "xo && grunt && grunt sigint"
   },
+  "engines": {
+    "node": ">=0.10.0"
+  },
   "dependencies": {
     "chalk": "^1.0.0",
     "date-time": "^1.0.0",
@@ -37,11 +40,8 @@
     "text-table": "^0.2.0"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-cli": "^0.1.13",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
     "xo": "*"
-  },
-  "engines": {
-    "node": ">=0.10.0"
   }
 }
