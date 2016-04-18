@@ -82,6 +82,7 @@ module.exports = function (grunt, cb) {
 		} else {
 			maxBarWidth = maxColumns - (longestTaskName + 20);
 		}
+		maxBarWidth = Math.max(0, maxBarWidth);
 
 		function shorten(taskName) {
 			var nameLength = taskName.length;
