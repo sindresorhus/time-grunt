@@ -160,7 +160,7 @@ module.exports = function (grunt, local, cb) {
 		}
 
 		// `grunt.log.header` should be unhooked above, but in some cases it's not
-		log('\n\n' + chalk.underline('Execution Time') + chalk.gray( ' (' + ((local && local === 'local')? (new Date(startTimePretty).toString()): (startTimePretty)) + ')'));
+		log('\n\n' + chalk.underline('Execution Time') + chalk.gray(' (' + ((local && local === 'local') ? (new Date(startTimePretty).toString()): (startTimePretty)) + ')'));
 		log(formatTable(tableData) + '\n');
 
 		if (cb) {
