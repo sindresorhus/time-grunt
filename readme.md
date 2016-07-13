@@ -23,14 +23,20 @@ module.exports = grunt => {
 	grunt.initConfig();
 }
 ```
+## Local timezone
 
+If you want to display the time in local timezone, then pass '**local**' as the second argument, else pass ***nothing*** or '**utc**' for default behavior.
+
+```js
+require('time-grunt')(grunt, 'local');
+```
 
 ## Optional callback
 
 If you want to collect the timing stats for your own use, pass in a callback:
 
 ```js
-require('time-grunt')(grunt, (stats, done) => {
+require('time-grunt')(grunt, 'local', (stats, done) => {
 	// do whatever you want with the stats
 	uploadReport(stats);
 
