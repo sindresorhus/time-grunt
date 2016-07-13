@@ -29,6 +29,7 @@ If you want to display the time in local timezone, then pass '**local**' as the 
 
 ```js
 require('time-grunt')(grunt, 'local');
+
 ```
 
 ## Optional callback
