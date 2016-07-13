@@ -6,6 +6,7 @@ var dateTime = require('date-time');
 var prettyMs = require('pretty-ms');
 var numberIsNan = require('number-is-nan');
 var barChar = require('figures').square;
+
 var argv = process.argv.slice(2);
 var write = process.stdout.write.bind(process.stdout);
 
@@ -160,7 +161,7 @@ module.exports = function (grunt, local, cb) {
 		}
 
 		// `grunt.log.header` should be unhooked above, but in some cases it's not
-		log('\n\n' + chalk.underline('Execution Time') + chalk.gray(' (' + ((local && local === 'local') ? (new Date(startTimePretty).toString()): (startTimePretty)) + ')'));
+		log('\n\n' + chalk.underline('Execution Time') + chalk.gray(' (' + ((local && local === 'local') ? (new Date(startTimePretty).toString()) : (startTimePretty)) + ')'));
 		log(formatTable(tableData) + '\n');
 
 		if (cb) {
