@@ -13,7 +13,7 @@ function log(str) {
 	write(str + '\n', 'utf8');
 }
 
-module.exports = function (grunt, cb) {
+module.exports = function (grunt, local, cb) {
 	var now = new Date();
 	var startTimePretty = dateTime();
 	var startTime = now.getTime();
@@ -160,7 +160,7 @@ module.exports = function (grunt, cb) {
 		}
 
 		// `grunt.log.header` should be unhooked above, but in some cases it's not
-		log('\n\n' + chalk.underline('Execution Time') + chalk.gray(' (' + startTimePretty + ')'));
+		log('\n\n' + chalk.underline('Execution Time') + chalk.gray( ' (' + ((local && local === 'local')? (new Date(startTimePretty).toString()): (startTimePretty)) + ')'));
 		log(formatTable(tableData) + '\n');
 
 		if (cb) {
