@@ -1,6 +1,6 @@
 # time-grunt [![Build Status](https://travis-ci.org/sindresorhus/time-grunt.svg?branch=master)](https://travis-ci.org/sindresorhus/time-grunt)
 
-> Display the elapsed execution time of [grunt](http://gruntjs.com) tasks
+> Display the elapsed execution time of [grunt](http://gruntjs.com) tasks in local time.
 
 ![](screenshot.png)
 
