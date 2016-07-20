@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "chalk": "^1.0.0",
-    "date-time": "^1.0.0",
+    "date-time": "^1.1.0",
     "figures": "^1.0.0",
     "hooker": "^0.2.3",
     "number-is-nan": "^1.0.0",
