@@ -16,7 +16,7 @@ function log(str) {
 
 module.exports = function (grunt, cb) {
 	var now = new Date();
-	var startTimePretty = dateTime('local');
+	var startTimePretty = dateTime(new Date(), {local: true});
 	var startTime = now.getTime();
 	var prevTime = startTime;
 	var prevTaskName = 'loading tasks';
