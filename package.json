@@ -2,6 +2,22 @@
   "name": "time-grunt",
   "version": "1.4.0",
   "description": "Display the elapsed execution time of grunt tasks",
+  "license": "MIT",
+  "repository": "sindresorhus/time-grunt",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "xo && grunt && grunt sigint"
+  },
+  "files": [
+    "index.js"
+  ],
   "keywords": [
     "grunt",
     "tasks",
@@ -14,27 +30,6 @@
     "performance",
     "tasks"
   ],
-  "license": "MIT",
-  "author": {
-    "name": "Sindre Sorhus",
-    "email": "sindresorhus@gmail.com",
-    "url": "sindresorhus.com"
-  },
-  "files": [
-    "index.js"
-  ],
-  "repository": "sindresorhus/time-grunt",
-  "scripts": {
-    "test": "xo && grunt && grunt sigint"
-  },
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "xo": {
-    "rules": {
-      "xo/no-process-exit": 0
-    }
-  },
   "dependencies": {
     "chalk": "^1.0.0",
     "date-time": "^1.1.0",
@@ -47,6 +42,11 @@
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
-    "xo": "*"
+    "xo": "^0.16.0"
+  },
+  "xo": {
+    "rules": {
+      "xo/no-process-exit": 0
+    }
   }
 }
