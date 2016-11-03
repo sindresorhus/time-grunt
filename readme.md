@@ -46,7 +46,7 @@ The `watch` task and tasks that take less than 1% of the total time are hidden t
 
 Run grunt with `grunt --verbose` to see all tasks.
 
-Run grunt with `grunt -q` to quiet all tasks including time-grunt.
+Run grunt with `grunt --quiet` to quiet all tasks including time-grunt.
 
 
 ## License
