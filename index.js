@@ -134,6 +134,7 @@ module.exports = function (grunt, cb) {
 			return acc;
 		}, []);
 
+		tableData.push(['total', totalTime]);
 		tableDataProcessed.push([chalk.magenta('Total', prettyMs(totalTime))]);
 
 		return table(tableDataProcessed, {
