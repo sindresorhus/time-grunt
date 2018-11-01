@@ -1,6 +1,6 @@
 {
   "name": "time-grunt",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "Display the elapsed execution time of grunt tasks",
   "license": "MIT",
   "repository": "sindresorhus/time-grunt",
