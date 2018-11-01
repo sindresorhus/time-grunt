@@ -1,3 +1,9 @@
+## Deprecated
+
+Deprecated because Grunt is practically unmaintained. Move on to something better. This package will continue to work with Grunt v1, but it will not receive any updates.
+
+---
+
 # time-grunt [![Build Status](https://travis-ci.org/sindresorhus/time-grunt.svg?branch=master)](https://travis-ci.org/sindresorhus/time-grunt)
 
 > Display the elapsed execution time of [grunt](http://gruntjs.com) tasks
